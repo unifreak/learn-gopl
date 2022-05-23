@@ -1,4 +1,6 @@
-org/
-pkg/
-answer/
-answer2/
+*
+.DS_Store
+.tags*
+!*.go
+!*.md
+tmp.go

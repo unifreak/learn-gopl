@@ -2,7 +2,6 @@
 package main
 
 import (
-    "fmt"
 	"image"
 	"image/color"
 	"image/gif"
@@ -46,7 +45,7 @@ func lissajous(out io.Writer) {
 		}
 		// then newly generated image is appended as new frame of gif
 		phase += 0.1
-		anim.Delay = append(anim.Delay, delay) // sturct field can be accessed by dot notation
+		anim.Delay = append(anim.Delay, delay) // struct field can be accessed by dot notation
 		anim.Image = append(anim.Image, img)
 	}
 	gif.EncodeAll(out, &anim) // NOTE: ignoring encoding errors

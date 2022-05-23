@@ -1,4 +1,6 @@
-// Ex1.4 print the names of all files in which each duplicaated line occurs.
+// Modify dup2 to print the names of all files in which each duplicated line occurs
+//
+// @todo: use struct to represent line, count and set of files
 package main
 
 import (
@@ -36,10 +38,7 @@ func main() {
     }
 }
 
-// `func` can be declared afterwards
 func countLines(f *os.File) {
-    // `map` is a reference to data structure create by `make()`
-    // hence change ot it is visible to callers
     input := bufio.NewScanner(f)
 
     var seen = make(map[string]bool)

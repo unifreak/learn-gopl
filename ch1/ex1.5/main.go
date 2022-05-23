@@ -1,4 +1,8 @@
-// change color palette to green on black
+// Change the Lissajous program's color palette to green on black, fro added
+// authenticity. To createe the web color #RRGGBB, use
+// 		color.RGBA{0xRR, 0xGG, 0xBB, 0xff}
+// where each paire of hexadecimal digits represents the intensity of the red,
+// green, or blue component of the pixel
 package main
 
 import (
@@ -11,12 +15,11 @@ import (
 	"os"
 )
 
-// `composite literal` to init any Go's composite type
 var green = color.RGBA{0x00, 0xff, 0x00, 0xff}
-var palette = []color.Color{color.Black, green} // [] a slice
+var palette = []color.Color{color.Black, green}
 const (
-	blackIndex = 0 // first color in palette
-	greenIndex = 1 // next color in palette
+	blackIndex = 0
+	greenIndex = 1
 )
 
 func main() {
@@ -25,27 +28,27 @@ func main() {
 
 func lissajous(out io.Writer) {
 	const (
-		cycles 	= 5 	// number of complete x oscillator revolutions
-		res    	= 0.001 // angular resolution
-		size 	= 100 	// image canvas covers [-size..+size]
-		nframes = 64 	// number of animation frames
-		delay 	= 8 	// delay between frames in 10ms units
+		cycles 	= 5
+		res    	= 0.001
+		size 	= 100
+		nframes = 64
+		delay 	= 8
 	)
-	freq := rand.Float64() * 3.0 // relative frequency of y oscillator
-	anim := gif.GIF{LoopCount: nframes} 	// {} a struct GIF
-	phase := 0.0 // phase difference
+	freq := rand.Float64() * 3.0
+	anim := gif.GIF{LoopCount: nframes}
+	phase := 0.0
 	for i := 0; i < nframes; i++ {
-		rect := image.Rect(0, 0, 2*size+1, 2*size+1) // 201*201 rect
-		img := image.NewPaletted(rect, palette) // initial set to pallete's zero value: color.White
+		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
+		img := image.NewPaletted(rect, palette)
 		for t := 0.0; t < cycles*2*math.Pi; t += res {
-			// every loop generate new image by setting pixel to black
+
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
 			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), greenIndex)
 		}
-		// then newly generated image is appended as new frame of gif
+
 		phase += 0.1
-		anim.Delay = append(anim.Delay, delay) // sturct field can be accessed by dot notation
+		anim.Delay = append(anim.Delay, delay)
 		anim.Image = append(anim.Image, img)
 	}
 	gif.EncodeAll(out, &anim) // NOTE: ignoring encoding errors

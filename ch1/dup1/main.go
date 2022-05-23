@@ -15,6 +15,7 @@ func main() {
 	input := bufio.NewScanner(os.Stdin)
 	// each call to .Scan() read next line and remove tailing newline char.
 	// result can be retrived by .Text()
+	// Scan function returns true if there is a line and false if there is no more input.
 	for input.Scan() {
 		counts[input.Text()]++
 	}
@@ -31,6 +32,8 @@ func main() {
 	// %% 				literal %
 
 	// NOTE: ignoring potential errors from input.Err()
+
+	// The order of map iteration is not specified, but in practice it is random
 	for line, n := range counts {
 		if n > 1 {
 			fmt.Printf("%d\t%s\n", n, line)
