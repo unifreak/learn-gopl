@@ -1,12 +1,16 @@
-// Ex2.2 is a general-purpose unit-conversion program
+// Write a general-purpose unit-conversion program analogous to cf that reads
+// numbers from its command-line arguments of from the standard input if there
+// are no arguments, and converts each number into units like temperature in
+// Celcius and Fahrenheit, length in feet and meters, weight in pounds and kilograms,
+// and the like.
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
-	"flag"
 	"strconv"
-	"./ex2.2"
+	"learn/gopl/ch2/ex2.2/conv"
 )
 
 var t = flag.Bool("t", false, "convert temperatures.")

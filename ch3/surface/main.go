@@ -1,4 +1,22 @@
 // Surface computes an SVG rendering of a 3-D surface function.
+//
+// The essence of the program is mapping between three different coordinate systems.
+//
+// The first is a 2-D grid of 100*100 cells identified by integer coordinates (i, j).
+//
+// The second coordinate system is a mesh of 3-D floating-point coordinates (x,y,z),
+// where x and y are linear functions of i and j, translated so that the origin is in
+// the center, and scaled by the constant xyrange. The height z is the value of
+// the surface function f(x,y).
+//
+// The third coordinate system is the 2-D image canvas, with (0,0) in the top left corner.
+// Points in this plane are denoted (sx, sy). We use an isometric projection to
+// map each 3-D point (x,y,z) onto the 2-D canvas. A point appears farther to the
+// right on the canvas the greater its x value or the smaller its y value. And a
+// point appears farther down the canvas the greater its x value or y value, and
+// the smaller its z value. The vertical and horizontal scale factors for x and y
+// are derived from the sine and cosine of a 30° angle. The scale factor for z, 0.4,
+// is an arbitrary parameter.
 package main
 
 import (
@@ -39,7 +57,7 @@ func corner(i, j int) (float64, float64) {
 	x := xyrange * (float64(i)/cells - 0.5)
 	y := xyrange * (float64(j)/cells - 0.5)
 
-	// Compoute surface height z.
+	// Compute surface height z.
 	z := f(x, y)
 
 	// Project (x,y,z) isometrically onto 2-D SVG canvas (sx,sy).

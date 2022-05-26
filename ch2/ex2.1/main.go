@@ -1,9 +1,13 @@
+// Add types, constants, and functions to tempconv for processing temperatures
+// in the Kelvin scale, where zero Kelvin is -273.15C and a difference of 1K has
+// the same magnitude as 1C.
 package main
 
 import (
 	"os"
 	"fmt"
 	"strconv"
+	"learn/gopl/ch2/ex2.1/tempconv"
 )
 
 func main() {

@@ -1,12 +1,13 @@
-// Ex1.8: auto prefix url with "http://"
+// Modify fetch to add the prefix http:// to each argument URL if it is missing.
+// You might want to use strings.HasPrefix
 package main
 
 import (
-	"strings"
 	"fmt"
-	"os"
-	"net/http"
 	"io/ioutil"
+	"net/http"
+	"os"
+	"strings"
 )
 
 func main() {

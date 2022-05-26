@@ -1,4 +1,4 @@
-// Ex1.9: also print status code
+// Modify fetch to also print the HTTP status code, found in resp.Status
 package main
 
 import (
