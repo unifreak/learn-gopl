@@ -1,5 +1,5 @@
-// Ex3.10 inserts commas in a non-negative decimal integer string
-// in non-recursive way.
+// Write a non-recursive version of comma, using bytes.Buffer instead of string
+// concatenation.
 package main
 
 import (

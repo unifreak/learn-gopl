@@ -1,5 +1,4 @@
-// Ex4.3: rewrite reverse (see rev/) function to use an array pointer
-// instead of a slice.
+// rewrite reverse (see rev/) function to use an array pointer instead of a slice.
 package rev
 
 const N = 10

@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// See https://developer.github.com/v3/
 const IssuesURL = "https://api.github.com/search/issues"
 
 type IssueSearchResult struct {
@@ -53,7 +54,7 @@ func SearchIssues(terms []string) (*IssueSearchResult, error) {
 	}
 
 	var result IssueSearchResult
-	// Unlike in json.go, we use the `streaming decoder` json.Decoder here,
+	// Unlike in movie/, we use the `streaming decoder` json.Decoder here,
 	// which allows several JSON entities to be decoded in sequence from the
 	// same stream (we don't need that feature here).
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

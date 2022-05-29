@@ -16,7 +16,7 @@ func TestRev(t *testing.T) {
         in := test.in
         reverse(&test.in)
         if test.in != test.out {
-            t.Errorf("reverse(%v)=%v, expection %v\n", in, test.in, test.out)
+            t.Errorf("reverse(%v)=%v, want %v\n", in, test.in, test.out)
         }
     }
 }

@@ -5,7 +5,7 @@ import "testing"
 func TestDedup(t *testing.T) {
     tests := []struct{
         s []string
-        expect []string
+        want []string
     }{
         {[]string{}, []string{}},
         {[]string{"a", "a"}, []string{"a"}},
@@ -16,8 +16,8 @@ func TestDedup(t *testing.T) {
     for _, test := range tests {
         s := test.s
         r := dedup(test.s)
-        if !equal(r, test.expect) {
-            t.Errorf("dedup(%v)=%v, expecting %v\n", s, r, test.expect)
+        if !equal(r, test.want) {
+            t.Errorf("dedup(%v)=%v, want %v\n", s, r, test.want)
         }
     }
 }

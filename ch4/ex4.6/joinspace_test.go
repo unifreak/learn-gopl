@@ -10,7 +10,8 @@ func TestJoinspace(t *testing.T) {
         {"", ""},
         {" ", " "},
         {" \t", " "},
-        {"你\t   好\t\n", "你 好 "},
+        {`你
+           好 `, "你 好 "},
     }
 
     for _, test := range tests {

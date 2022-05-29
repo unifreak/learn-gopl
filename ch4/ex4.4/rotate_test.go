@@ -6,7 +6,7 @@ func TestRotate(t *testing.T) {
     tests := []struct{
         s []int
         pos int
-        expect []int
+        want []int
     }{
         {[]int{0, 1, 2}, 1, []int{2, 0, 1}},
         {[]int{0, 1, 2}, 2, []int{1, 2, 0}},
@@ -19,8 +19,8 @@ func TestRotate(t *testing.T) {
     for _, test := range tests {
         s := test.s
         r := rotate(test.s, test.pos)
-        if !equal(r, test.expect) {
-            t.Errorf("rotate(%v, %d)=%v, expecting %v", s, test.pos, r, test.expect)
+        if !equal(r, test.want) {
+            t.Errorf("rotate(%v, %d)=%v, want %v", s, test.pos, r, test.want)
         }
     }
 }

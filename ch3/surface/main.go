@@ -17,6 +17,10 @@
 // the smaller its z value. The vertical and horizontal scale factors for x and y
 // are derived from the sine and cosine of a 30° angle. The scale factor for z, 0.4,
 // is an arbitrary parameter.
+//
+// isometric projection, see
+// - http://www.gandraxa.com/isometric_projection.xml
+// - https://en.wikipedia.org/wiki/Isometric_projection
 package main
 
 import (

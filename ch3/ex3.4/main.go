@@ -1,7 +1,12 @@
-// Ex3.4 computes an SVG rendering of a 3-D surface function and write
-// to HTTP client.
+// Following the approach of the Lissajous example, construct a web server that
+// computes surfaces and writes SVG data to the client. The server must set the
+// Content-Type header like this:
+//      w.Header().Set("Content-Type", "image/svg+xml")
+// Allow the client to specify values like height, width, and color as HTTP
+// request parameters.
 //
-// @todo: width, height, color URL parameter
+// @todo
+// - how to change color by HTTP request parameter?
 package main
 
 import (

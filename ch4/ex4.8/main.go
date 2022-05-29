@@ -1,5 +1,5 @@
-// Ex4.8: Modify charcount to count letters, digits, and so on in their
-// Unicode categories, using functions like unicode.IsLetter.
+// Modify charcount to count letters, digits, and so on in their Unicode categories,
+//  using functions like unicode.IsLetter.
 package main
 
 import (
@@ -12,10 +12,10 @@ import (
 )
 
 var (
-    counts = make(map[rune]int)    // counts of Unicode characters
-    countsPerType = make(map[string]int) // countes for category
-    utflen [utf8.UTFMax+1]int   // count of lengths of UTF-8 encodings. UTFMax is 4
-    invalid = 0                    // count of invalid UTF-8 characters
+    counts = make(map[rune]int)             // counts of Unicode characters
+    countsPerType = make(map[string]int)    // countes for category
+    utflen [utf8.UTFMax+1]int               // count of lengths of UTF-8 encodings. UTFMax is 4
+    invalid = 0                             // count of invalid UTF-8 characters
 )
 
 func countType(r rune) {

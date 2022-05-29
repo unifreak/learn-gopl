@@ -1,4 +1,6 @@
-// Surface computes an SVG rendering of a 3-D surface function.
+// If the function f returns a non-finit float64 valueu, the SVG file will contain
+// invalid <polygon> elements (although amny SVG renderers handle this gracefully).
+// Modify the program to skip invalid polygons
 package main
 
 import (

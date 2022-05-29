@@ -1,5 +1,5 @@
-// Ex3.11 inserts commas in a non-negative decimal integer string
-// in non-recursive way, and can handle leading sign and floating point.
+// Enhance comma so that it deals correctly with floating-point numbers and an
+// optional sign
 package main
 
 import (
