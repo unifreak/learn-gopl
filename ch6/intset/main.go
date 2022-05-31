@@ -1,3 +1,8 @@
+// A set represented by a map is very flexible but, for certain problems, a
+// specialized representation may outperform it. For example, in domains such as
+// dataflow analysis where set elements are small non-negative integers, sets have
+// many elements, and set operations like union and intersection are common,
+// a *bit verctor* is ideal.
 package main
 
 import (
@@ -19,7 +24,34 @@ func main() {
 	x.UnionWith(&y)
 	fmt.Println(x.String()) // "{1 9 42 144}"
 	fmt.Println(x.Has(9), x.Has(123)) // "true false"
+
+	// A word of caution: we declared String and Has as methods of the pointer type
+	// *IntSet not out of necessity, but for consistency with the other two methods,
+	// which need a pointer receiver because they assign to s.words. Consequently,
+	// an IntSet *value* does not have a String method, occasinally leading to
+	// surprises like this:
+
+	// a *IntSet have a String method.
+	fmt.Println(&x) 		// "{1 9 42 144}"
+
+	// the compiler insert the implicit & operation, giving us a pointer.
+	fmt.Println(x.String()) // "{1 9 42 144}"
+
+	// IntSet value does not have a String method, prints the representation of the
+	// struct instead.
+	//
+	// It's important not to forget the & operator. Making String a method of
+	// IntSet, not *IntSet, might be a good idea, but this is a case-by-case judgment.
+	fmt.Println(x) 			// "[4398046511618 0 65536]}"
+							// 4398046511618: (1<<1)+(1<<9)+(1<<42)
+							// 0
+							// 65535: 1<<144
 }
+
+// A bit vector uses a slice of unsigned integer values for "words", each bit
+// of which represents a possible elment of the set.
+//
+// The set contains i if the i-th bit is set.
 
 // An IntSet is a set of samll non-negative integers.
 // Its zero value represents the empty set.
@@ -63,7 +95,7 @@ func (s *IntSet) String() string {
 		}
 		for j := 0; j < 64; j++ {
 			if word&(1<<uint(j)) != 0 {
-				if buf.Len() > len("{") {
+				if buf.Len() > len("{") { // trick: how to handle space
 					buf.WriteByte(' ')
 				}
 				fmt.Fprintf(&buf, "%d", 64*i+j)
