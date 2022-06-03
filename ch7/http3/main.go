@@ -9,6 +9,9 @@ import (
 func main() {
 	db := database{"shoes": 50, "socks": 5}
 	mux := http.NewServeMux()
+
+	// The expression http.HandlerFunc(db.list) is a conversion, not a function call,
+	// since http.HandlerFunc is a type.
 	mux.Handle("/list", http.HandlerFunc(db.list))
 	mux.Handle("/price", http.HandlerFunc(db.price))
 	log.Fatal(http.ListenAndServe("localhost:8000", mux))

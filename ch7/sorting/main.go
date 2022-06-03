@@ -4,7 +4,13 @@ import (
 	"os"
 	"time"
 	"fmt"
+
+	// we uses the text/tabwriter package to produce a table whose columns are neatly
+	// aligned and padded. Observe that *tabwriter.Writer satisfies io.Writer. It
+	// collects each peice of data written to it; its Flush method formats the entire
+	// table and writes it to os.Stdout.
 	"text/tabwriter"
+
 	"sort"
 )
 
@@ -42,6 +48,8 @@ func printTracks(tracks []*Track) {
 	tw.Flush() // calculate column widths and print table
 }
 
+// To sort the playlist by the Artis field, we define a new slice type with the
+// necessary Len, Less, and Swap methods.
 type byArtist []*Track
 
 func (x byArtist) Len() int 			{ return len(x) }
@@ -54,6 +62,8 @@ func (x byYear) Len() int 				{ return len(x) }
 func (x byYear) Less(i, j int) bool 	{ return x[i].Year < x[j].Year }
 func (x byYear) Swap(i, j int) 			{ x[i], x[j] = x[j], x[i] }
 
+// The concrete type customSort combines a slice with a function, letting us define
+// a new sort order by writing only the comparison function.
 type customSort struct {
 	t 		[]*Track
 	less 	func(i, j *Track) bool
