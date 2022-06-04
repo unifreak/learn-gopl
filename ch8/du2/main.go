@@ -1,4 +1,14 @@
-// The du1 command computes the disk usage of the files in a directory.
+// The du2 command computes the disk usage of the files in a directory.
+//
+// It prints the totals periodically, but only if the -v flag is specified.
+//
+// The background gorouine that loops over roots remains unchanged. The main goroutin
+// now uses a ticker to generate events every 500ms, and a select statement to wait
+// for either a file size message, in which case it updates the totals, or a tick
+// event, in which case it prints the current totals.
+//
+// If the -v flag is not specified, the tick channel remains nil, and its case in the
+// select is effectively disabled.
 package main
 
 import (
@@ -66,6 +76,8 @@ func main() {
 loop:
 	for {
 		select {
+		// since the program no longer uses a range loop, the first select case must
+		// explicitly test whether the fileSizes channel has been closed, using ok.
 		case size, ok := <-fileSizes:
 			if !ok {
 				break loop

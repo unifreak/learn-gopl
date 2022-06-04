@@ -1,4 +1,14 @@
-// The du1 command computes the disk usage of the files in a directory.
+// The du3 command computes the disk usage of the files in a directory.
+//
+// this version concurrently runs walkDir to exploiting parallelism in the disk system.
+//
+// it uses a sync.WaitGroup to count the number of calls to walkDir that are still
+// active, and a closer goroutine to close the fileSizes channel when the counter
+// drops to zero.
+//
+// Since this program creates many thousands of goroutines at its peak, we have to
+// change dirents to use a counting semaphore to prevent it from opening too many
+// files at once.
 package main
 
 import (
@@ -19,7 +29,7 @@ func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
 		if entry.IsDir() {
 			n.Add(1)
 			subdir := filepath.Join(dir, entry.Name())
-			walkDir(subdir, n, fileSizes)
+			go walkDir(subdir, n, fileSizes)
 		} else {
 			fileSizes <- entry.Size()
 		}

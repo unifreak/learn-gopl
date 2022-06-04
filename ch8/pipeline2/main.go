@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Finite pipeline indicated by closing a channel.
 func main() {
 	naturals := make(chan int)
 	squares := make(chan int)
@@ -18,6 +19,16 @@ func main() {
 
 	// Squarer
 	go func() {
+		// equivalent to:
+		//
+		// 		for {
+		// 			x, ok := <-naturals
+		// 			if !ok {
+		// 				break
+		// 			}
+		// 			squares <- x*x
+		// 		}
+		//
 		for x := range naturals {
 			squares <- x * x
 		}

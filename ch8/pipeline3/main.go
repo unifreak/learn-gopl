@@ -1,3 +1,4 @@
+// this time with unidirectional channel types
 package main
 
 import "fmt"

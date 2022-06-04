@@ -20,7 +20,7 @@ func main() {
 			log.Print(err) // e.g. connection aborted
 			continue
 		}
-		handleConn(conn) // handle one connection at a time
+		go handleConn(conn) // handle one connection at a time
 	}
 }
 

@@ -28,7 +28,7 @@ func main() {
 	}
 }
 
-// Conceptually, thr prerequisite information forms a directed graph with a node
+// Conceptually, the prerequisite information forms a directed graph with a node
 // for each course and edge from each course to the courses that it depends on.
 // The graph is acyclic: there is no path from a course that leads back to itself.
 // We can compute a valid sequence using *depth-first search* through the graph.

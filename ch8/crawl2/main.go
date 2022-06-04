@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"../../ch5/links"
+	"learn/gopl/ch5/links"
 )
 
 // token is a counting semaphor used to

@@ -14,12 +14,12 @@ func main() {
 		log.Fatal(err)
 	}
 	for {
-		conn, err := listener.Accept()
+		conn, err := listener.Accept() // block until incoming connection request is made
 		if err != nil {
 			log.Print(err) // e.g. connection aborted
 			continue
 		}
-		handleConn(conn) // handle one connection at a time
+		handleConn(conn) // handle one connection at a time. Sequential.
 	}
 }
 
