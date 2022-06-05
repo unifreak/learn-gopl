@@ -3,6 +3,8 @@ package bank
 import "sync"
 
 var (
+	// By convention, the variables guarded by a mutex are declared immediately after
+	// the declaration of the mutex itself.
 	mu sync.Mutext // guards balance
 	balance int
 )
